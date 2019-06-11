@@ -1,6 +1,9 @@
 # esp32-cmake-development-env
 
+[![Docker build status](https://img.shields.io/docker/cloud/build/shungok/esp32-cmake-development-env.svg)](https://hub.docker.com/r/shungok/esp32-cmake-development-env/builds) ![Docker automated](https://img.shields.io/docker/cloud/automated/shungok/esp32-cmake-development-env.svg) ![Docker layers](https://img.shields.io/microbadger/layers/shungok/esp32-cmake-development-env.svg) ![Docker image-size](https://img.shields.io/microbadger/image-size/shungok/esp32-cmake-development-env.svg) ![Docker pulls](https://img.shields.io/docker/pulls/shungok/esp32-cmake-development-env.svg) ![Docker stars](https://img.shields.io/docker/stars/shungok/esp32-cmake-development-env.svg)
+
 ## Purpose
+
 This project provide a build and flash environment for ESP32 using docker container.
 
 ## Dependencies
@@ -103,7 +106,7 @@ rst:0x1 (POWERON_RESET),boot:0x3 (DOWNLOAD_BOOT(UART0/UART1/SDIO_REI_REO_V2))
 waiting for download
 ```
 
-After that flash built image.
+After that flash the built image.
 
 ※ Public document: [Get Started (CMake) — ESP-IDF Programming Guide v3.2 documentation (flash-to-a-device)](https://docs.espressif.com/projects/esp-idf/en/stable/get-started-cmake/index.html#flash-to-a-device)
 
