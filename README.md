@@ -18,17 +18,32 @@ This project provide a build and flash environment for ESP32 using docker contai
 The steps in this section assume that the Docker host OS has recognized ESP32 (USB device).
 If your development environment is not native linux, you have to prepare a docker host that recognized USB that follows [this step](#preparation-for-non-native-linux-os).
 
-First, you have to download Dockerfile from this repository.
-Second, follow the steps below.
+Please, follow the steps below.
 
-1. Build docker image.
+1. Prepare docker image.
+    - Case of using latest image which is managed DockerHub.
+    - Case of using manual building image.
 2. Start up docker container and connect the container.
 3. Build and flash esp32 project.
 4. Monitor output from usb serial port.
 
 ### Steps
 
-#### 1. Build docker image.
+#### 1. Prepare docker image.
+
+Please select a way what you like.
+
+##### Case of using latest image which is managed DockerHub.
+
+```shell
+% docker pull shungok/esp32-cmake-development-env
+% docker images
+REPOSITORY                            TAG                 IMAGE ID            CREATED             SIZE
+shungok/esp32-cmake-development-env   latest              cb09e767768e        3 hours ago         1.16GB
+debian                                9.9-slim            92d2f0789514        4 weeks ago         55.3MB
+```
+
+##### Case of using manual building image.
 
 ```shell
 % cat Dockerfile | docker build - -t esp32-idfv3.3-beta3
@@ -55,16 +70,17 @@ Sending build context to Docker daemon  3.072kB
 
 #### 2. Start up docker container and connect the container.
 
-To start up docker container for building and flashing esp32 project, you have to specify two things.
+To start up docker container for building and flashing esp32 project, you have to specify three things.
 
-1. The usb device filepath which was detected in docker host OS. (with --device option)
-2. The project directory (/path/to/esp32_project_directory) you want to use in docker container. (with -v option)
+1. Usb device filepath which was detected in docker host OS. (with --device option)
+2. Project directory (/path/to/esp32_project_directory) you want to use in docker container. (with -v option)
+3. Docker image. (ex: shungok/esp32-cmake-development-env:latest)
 
 ```shell
 % cd /path/to/esp32_project_directory; pwd
 /path/to/esp32_project_directory
 
-% docker run --rm --device /dev/ttyUSB0 -v `pwd`:/esp/project -it esp32-idfv3.3-beta3
+% docker run --rm --device /dev/ttyUSB0 -v `pwd`:/esp/project -it shungok/esp32-cmake-development-env:latest
 ※ into docker container
 root@eccd3cbaaae6:/esp/project#
 ```
@@ -221,7 +237,7 @@ If you want to disconnect this serial connection, you should input ctrl + ].
 
 #### Verification conditions
 
-I verified under the following conditions.
+I verified under following conditions.
 
 * macOS: 10.14.4 (Mojave)
 * Docker Desktop community: 2.0.0.3/31259 (channel:stable)
@@ -360,7 +376,7 @@ docker-host-default   -        virtualbox   Running   tcp://192.168.99.100:2376 
 
 ##### 3. Confirme to detect ESP32 on Virtualbox VM.
 
-When the virtual machine recognizes the device, the macOS device file disappears.
+When the virtual machine recognizes the device, the device file in macOS disappears.
 
 ```shell
 % ls -l /dev/*.usbserial*
