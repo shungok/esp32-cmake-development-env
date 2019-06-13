@@ -318,41 +318,30 @@ Second, connect ESP32 to PC and make sure that macOS detects the device.
 crw-rw-rw-  1 root  wheel   18,  35  6 10 18:04 /dev/cu.usbserial-DM01OY8T
 crw-rw-rw-  1 root  wheel   18,  34  6 10 18:02 /dev/tty.usbserial-DM01OY8T
 
-% system_profiler SPUSBDataType
-USB:
-
-    USB 3.0 Bus:
-
-      Host Controller Driver: AppleUSBXHCILPT
-      PCI Device ID: 0x9c31
-      PCI Revision ID: 0x0004
-      PCI Vendor ID: 0x8086
-
+% vboxmanage list usbhost
 …
+UUID:               e0ec3035-eec7-4700-acc7-7addb590a802
+VendorId:           0x0403 (0403)
+ProductId:          0x6015 (6015)
+Revision:           16.0 (1600)
+Port:               3
+USB version/speed:  0/Full
+Manufacturer:       FTDI
+Product:            FT230X Basic UART
+SerialNumber:       DM01OY8T
+Address:            p=0x6015;v=0x0403;s=0x00029c24d58155c8;l=0x14130000
+Current State:      Captured
 
-        FT230X Basic UART:
+or you can use blow command.
 
-          Product ID: 0x6015
-          Vendor ID: 0x0403  (Future Technology Devices International Limited)
-          Version: 10.00
-          Serial Number: DM01OY8T
-          Speed: Up to 12 Mb/sec
-          Manufacturer: FTDI
-          Location ID: 0x14100000 / 26
-          Current Available (mA): 500
-          Current Required (mA): 90
-          Extra Operating Current (mA): 0
+% system_profiler SPUSBDataType
 ```
 
 Third, set USB Device Filter of Virtualbox VM.
 
 ```shell
-% vboxmanage modifyvm docker-host-default --usbehci on
-(need VirtualBox Extention Pack)
-
-or
-
 % vboxmanage modifyvm docker-host-default --usb on
+% vboxmanage modifyvm docker-host-default --usbehci on
 
 % vboxmanage usbfilter add 0 --target docker-host-default --name 'FTDI FT230X Basic UART' --vendorid 0x0403 --productid 0x6015 --manufacturer FTDI
 ```
