@@ -6,11 +6,11 @@ FROM debian:9.9-slim
 ################################################################################
 # define ARG and ENV
 ################################################################################
-ARG PACKAGES_FOR_ESP_TOOLCHAIN="gcc git wget make libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future python-pyparsing python-pyelftools"
+ARG PACKAGES_FOR_ESP_TOOLCHAIN="git wget libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future python-pyparsing cmake ninja-build ccache"
 ARG PACKAGES_FOR_ESP_IDF="cmake ninja-build"
 ARG PACKAGES_FOR_DEBUG="vim"
 ARG ESP_TOOLCHAIN_ARCHIVE="xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz"
-ARG ESP_IDF_VERSION="v3.3-beta3"
+ARG ESP_IDF_VERSION="v3.3"
 
 ENV DIR_ESP_BASE /opt/local/esp
 ENV IDF_PATH ${DIR_ESP_BASE}/esp-idf
