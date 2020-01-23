@@ -10,7 +10,7 @@ ARG PACKAGES_FOR_ESP_TOOLCHAIN="git wget libncurses-dev flex bison gperf python 
 ARG PACKAGES_FOR_ESP_IDF="cmake ninja-build"
 ARG PACKAGES_FOR_DEBUG="vim"
 ARG ESP_TOOLCHAIN_ARCHIVE="xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz"
-ARG ESP_IDF_VERSION="v3.3"
+ARG ESP_IDF_VERSION="v3.3.1"
 
 ENV DIR_ESP_BASE /opt/local/esp
 ENV IDF_PATH ${DIR_ESP_BASE}/esp-idf
